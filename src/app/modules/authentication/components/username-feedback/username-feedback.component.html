@@ -1,0 +1,9 @@
+<div class="text-center mb-4" [ngClass]="feedback.color">
+  <h4 class="text-3xl font-semibold mb-2">
+    {{ username || "@username" }}
+  </h4>
+  <div class="flex items-center justify-center gap-2">
+    <i [ngClass]="feedback.icon"></i>
+    <p>{{ feedback.message }}</p>
+  </div>
+</div>

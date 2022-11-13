@@ -13,10 +13,10 @@ export class ResetPasswordComponent {
 
   constructor(private _auth: AuthenticationService) {}
 
-  resetPassword(): void {
-    if (this.email.invalid) {
+  async resetPassword(): Promise<void> {
+    if (this.email.invalid || !this.email.value) {
       return;
     }
-    console.log(this.email.value);
+    await this._auth.resetPassword(this.email.value);
   }
 }

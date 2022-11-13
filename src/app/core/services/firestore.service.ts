@@ -27,7 +27,7 @@ export class FirestoreService {
     return doc(this._firestore, path) as DocumentReference<T>;
   }
 
-  docData$<T>(ref: DocumentReference<T> | string): Observable<T> {
+  doc$<T>(ref: DocumentReference<T> | string): Observable<T> {
     return isString(ref) ? docData(this.doc<T>(ref)) : docData(ref);
   }
 

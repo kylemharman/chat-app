@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateUsernameGuard } from 'app/core/guards/create-username.guard';
-
 import { CreateUsernameComponent } from './containers/create-username/create-username.component';
 import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 import { SignInComponent } from './containers/sign-in/sign-in.component';
@@ -17,7 +15,7 @@ const routes: Routes = [
   {
     path: 'create-username',
     component: CreateUsernameComponent,
-    canActivate: [AuthGuard, CreateUsernameGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectToSignIn },
   },
 ];

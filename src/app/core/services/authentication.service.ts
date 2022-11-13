@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   signOut,
   User,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -58,6 +59,28 @@ export class AuthenticationService {
     await signOut(this._afAuth)
       .catch((error) => this._displayErrorMessage(error.message))
       .finally(() => this._router.navigateByUrl('sign-in'));
+  }
+
+  async resetPassword(email: string): Promise<void> {
+    await sendPasswordResetEmail(this._afAuth, email)
+      .then(() =>
+        this._displaySucessMessage(
+          'Email Sent',
+          'Check your email to reset password'
+        )
+      )
+      .catch((error) => this._displayErrorMessage(error.message));
+  }
+
+  private _displaySucessMessage(
+    summary: string = 'Sucess',
+    message: string
+  ): void {
+    this._message.add({
+      severity: 'sucess', // TODO - make sure 'sucess is valid'
+      summary,
+      detail: message,
+    });
   }
 
   private _displayErrorMessage(message: string): void {

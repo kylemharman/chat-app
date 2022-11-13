@@ -6,7 +6,6 @@ import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
-
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';

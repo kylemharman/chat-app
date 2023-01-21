@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Auth, authState, User } from '@angular/fire/auth';
+import { Auth, User, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { filterNil } from '@yappy/shared';
 import { MessageService } from 'primeng/api';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IUser } from '../models/user';
 import { IUsername } from '../models/username';
 import { FirestoreService } from './firestore.service';
@@ -12,8 +11,8 @@ import { FirestoreService } from './firestore.service';
   providedIn: 'root',
 })
 export class UserService {
-  user$: Observable<IUser | null>;
   user: User | null;
+  user$: Observable<User | null>;
 
   constructor(
     private _afAuth: Auth,
@@ -22,10 +21,7 @@ export class UserService {
     private _router: Router
   ) {
     this.user = this._afAuth.currentUser;
-    this.user$ = authState(this._afAuth).pipe(
-      filterNil(),
-      switchMap(({ uid }) => this._fs.doc$<IUser>(`users/${uid}`))
-    );
+    this.user$ = authState(this._afAuth);
   }
 
   async createUser(username: string): Promise<void> {

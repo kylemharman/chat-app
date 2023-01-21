@@ -8,6 +8,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('./modules/root/root.module').then((m) => m.RootModule),
+  },
+  {
+    path: '',
+    loadChildren: () =>
       import('./modules/authentication/authentication.module').then(
         (m) => m.AuthenticationModule
       ),
@@ -17,9 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectToSignIn },
     loadChildren: () =>
-      import('./modules/dashboard/dashboard.module').then(
-        (m) => m.DashboardModule
-      ),
+      import('./modules/chat/chat.module').then((m) => m.ChatModule),
   },
 ];
 
